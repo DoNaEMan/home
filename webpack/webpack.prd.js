@@ -40,26 +40,6 @@ const config = {
         ],
       },
       {
-        test: /\.scss$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-            options: {
-              modules: true,
-              localIdentName: '[local]__[hash:5]',
-            },
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              plugins: [require('autoprefixer')],
-            },
-          },
-          'sass-loader',
-        ],
-      },
-      {
         test: /\.html$/,
         loader: 'html-loader',
       },

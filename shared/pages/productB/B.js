@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import * as styles from './style.scss';
+import * as styles from './style.less';
 
 class B extends React.Component {
   counter() {

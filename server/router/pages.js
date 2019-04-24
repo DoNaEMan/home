@@ -16,13 +16,6 @@ require('css-modules-require-hook')({
   generateScopedName,
 });
 
-// sass css hook
-require('css-modules-require-hook')({
-  extensions: ['.scss'],
-  processorOpts: { parser: require('postcss-scss').parse },
-  generateScopedName,
-});
-
 // image compiler hook
 require('asset-require-hook')({
   extensions: ['jpg', 'png', 'gif', 'webp', 'ico'],
