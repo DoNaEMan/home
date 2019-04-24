@@ -1,0 +1,100 @@
+pre {
+  color: blue !important;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.carousel-wrap {
+  width: 214px;
+  padding: 20px;
+  border: solid 1px #ececec;
+  position: relative;
+  overflow: hidden;
+  height: 214px;
+  background: gold;
+  .abc {
+    color: hsl(0, 100%, 50%);
+  }
+}
+
+.carousel-wrap:hover::after,
+.carousel-wrap:hover::before {
+  width: 100%;
+  transition-property: width;
+}
+
+.carousel-wrap:hover i::after,
+.carousel-wrap:hover i::before {
+  height: 100%;
+  transition-property: height;
+}
+
+.carousel-wrap::before {
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-top: 2px solid #2ab26a;
+  transition-delay: 0.3s;
+}
+
+.carousel-wrap i::after {
+  right: 0;
+  top: 0;
+  height: 0;
+  width: 0;
+  border-left: 2px solid #2ab26a;
+  transition-delay: 0.2s;
+}
+
+.carousel-wrap::after {
+  bottom: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-top: 2px solid #2ab26a;
+  transition-delay: 0.1s;
+}
+
+.carousel-wrap i::before {
+  left: 0;
+  bottom: 0;
+  height: 0;
+  width: 0;
+  border-left: 2px solid #fff;
+  transition-delay: 0s;
+}
+
+.carousel-wrap:hover::before {
+  transition-delay: 0s;
+}
+
+.carousel-wrap:hover i::after {
+  transition-delay: 0.1s;
+}
+
+.carousel-wrap:hover::after {
+  transition-delay: 0.2s;
+}
+
+.carousel-wrap:hover i::before {
+  transition-delay: 0.3s;
+}
+
+.carousel-wrap i::before,
+.carousel-wrap i::after {
+  position: absolute;
+  display: block;
+  content: "";
+  transition-duration: 0.1s;
+}
+
+.carousel-wrap::before,
+.carousel-wrap::after {
+  position: absolute;
+  display: block;
+  content: "";
+  transition-duration: 0.1s;
+}
