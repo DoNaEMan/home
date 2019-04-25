@@ -10,4 +10,4 @@ COPY ./ /root/app
 
 RUN npm run build
 
-CMD npm start
+CMD ["npm", "start"]

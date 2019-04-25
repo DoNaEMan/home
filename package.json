@@ -93,7 +93,7 @@
     "koa-webpack-middleware": "^1.0.7",
     "nodemon": "^1.18.10",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
-    "react-file-pack": "^1.1.0",
+    "react-file-pack": "^2.0.0",
     "redux-logger": "^3.0.6",
     "style-loader": "^0.23.1",
     "webpack": "^4.29.6",
