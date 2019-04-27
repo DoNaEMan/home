@@ -1,5 +1,4 @@
-import { createStore, applyMiddleware } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { createStore } from 'redux';
 
 import reducer from './reducer';
 
@@ -12,7 +11,9 @@ if (typeof window === 'object') {
 }
 
 if (process.env.NODE_ENV === 'development') {
-  arg.push(composeWithDevTools(applyMiddleware()));
+  if (window.__REDUX_DEVTOOLS_EXTENSION__) {
+    arg.push(window.__REDUX_DEVTOOLS_EXTENSION__());
+  }
 }
 
 export {

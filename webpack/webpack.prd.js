@@ -4,7 +4,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const LoadablePlugin = require('@loadable/webpack-plugin');
 
 const config = {
@@ -95,6 +94,7 @@ const config = {
 
 // 选择性加载分析工具
 if (process.env.ANALYZER) {
+  const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
   config.plugins.push(new BundleAnalyzerPlugin());
 }
 

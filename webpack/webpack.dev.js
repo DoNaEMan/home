@@ -63,6 +63,9 @@ const config = {
       alwaysWriteToDisk: true,
       title: 'demo',
     }),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('development'),
+    }),
     new LoadablePlugin({
       filename: path.resolve(__dirname, '../dist/loadable-stats.json'),
       writeToDisk: true,

@@ -8,7 +8,7 @@ WORKDIR /var/www/html
 
 COPY ./package.json  /var/www/html/
 
-RUN npm install --verbose
+RUN npm install --production --verbose
 
 COPY ./ /var/www/html
 

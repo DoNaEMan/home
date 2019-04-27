@@ -1,5 +1,5 @@
 let generateScopedName = '[local]__[hash:5]';
-if (process.env.DEPLOY_ENV === 'dev') {
+if (process.env.NODE_ENV === 'development') {
   generateScopedName = '[path][name]__[local]';
 }
 
