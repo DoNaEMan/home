@@ -2,16 +2,16 @@ FROM node:10.15.3-alpine
 
 RUN npm cache clean --force
 
-RUN mkdir -p /var/www/html/
+RUN mkdir -p /root/app
 
-WORKDIR /var/www/html
+WORKDIR /root/app
 
-COPY ./package.json  /var/www/html/
+COPY ./package.json  /root/app
 
 RUN npm install --production --verbose
 
-COPY ./ /var/www/html
+COPY ./ /root/app
 
 RUN npm run build
 
-CMD ["npm", "start"]
+CMD npm start
