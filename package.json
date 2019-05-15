@@ -11,7 +11,7 @@
     "delay": "2500"
   },
   "scripts": {
-    "dev": "react-file-pack ./react-file-pack-config.js && nodemon ./server/bin/server.dev.js",
+    "dev": "react-file-pack ./react-file-pack-config.js && cross-env NODE_ENV=development nodemon ./server/bin/server.dev.js",
     "dev:analyze": "react-file-pack ./react-file-pack-config.js && cross-env ANALYZER=true nodemon ./server/bin/server.dev.js",
     "build": "react-file-pack ./react-file-pack-config.js && webpack --config ./webpack/webpack.prd.js --progress",
     "start": "node ./server/bin/server.prd.js",
