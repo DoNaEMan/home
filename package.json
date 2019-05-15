@@ -17,7 +17,8 @@
     "start": "node ./server/bin/server.prd.js",
     "build:analyze": "react-file-pack ./react-file-pack-config.js && cross-env ANALYZER=true webpack --config ./webpack/webpack.prd.js --progress",
     "eslint:fix": "./node_modules/.bin/eslint . --ext .js --fix",
-    "stylelint:fix": "stylelint 'shared/**/*.css' --fix"
+    "stylelint:fix": "stylelint 'shared/**/*.css' --fix",
+    "refresh": "react-file-pack ./react-file-pack-config.js"
   },
   "repository": {
     "type": "git",
@@ -67,6 +68,7 @@
     "postcss": "^6.0.23",
     "postcss-less": "^3.1.4",
     "postcss-loader": "^3.0.0",
+    "prop-types": "^15.7.2",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "react-file-pack": "^3.0.0",
