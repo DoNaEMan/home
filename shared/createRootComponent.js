@@ -4,10 +4,8 @@ import { StaticRouter } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
 
-import { createStore, arg } from './createStore';
+import store from './createStore';
 import routes from './router';
-
-const store = createStore(...arg);
 
 const createClientRootComponent = () => (
   <Provider store={store}>

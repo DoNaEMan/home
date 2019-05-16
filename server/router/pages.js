@@ -27,10 +27,11 @@ const Router = require('koa-router');
 const { renderToString, renderToNodeStream } = require('react-dom/server');
 const { ChunkExtractor, ChunkExtractorManager } = require('@loadable/server');
 const { matchRoutes, renderRoutes } = require('react-router-config');
+const { createStore } = require('redux');
 
 const statsFile = path.resolve(__dirname, '../../dist/loadable-stats.json');
 const { createServeRootComponent, routes } = require('../../shared/createRootComponent');
-const { createStore, arg } = require('../../shared/createStore');
+const reducer = require('../../shared/reducer');
 const config = require('../../config');
 
 const router = new Router();
@@ -44,7 +45,7 @@ router.get('/*', async (ctx, next) => {
   const allRequsts = [];
   const allCallbacks = [];
   // 创建服务端store
-  const store = createStore(...arg);
+  const store = createStore(reducer);
   matchedRouter.forEach(({ route }) => {
     const loaddata = route.loaddata;
     if (!loaddata) return;
