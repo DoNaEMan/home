@@ -46,10 +46,6 @@ const config = {
         test: /\.js$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
-        options: {
-          presets: ['@babel/preset-env', '@babel/preset-react'],
-          plugins: ['@babel/plugin-syntax-dynamic-import', '@loadable/babel-plugin', 'add-module-exports'],
-        },
       },
     ],
   },

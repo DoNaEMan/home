@@ -1,6 +1,8 @@
-.home {
-  text-align: center;
+@import "../../common";
 
+.home {
+  position: relative;
+  padding: 20px 0;
   p:nth-of-type(1) {
     font-size: 28px;
     line-height: 1.5;
@@ -15,4 +17,54 @@
   .button {
     margin-top: 20px;
   }
+}
+
+.mask {
+  position: fixed;
+  padding: 20px 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, .2);
+  z-index: 100;
+  overflow: auto;
+  .middle;
+}
+
+.login {
+  position: relative;
+  box-sizing: border-box;
+  padding: 30px 20px 40px;
+  width: 300px;
+  border: 1px solid @border-default-color;
+  background: #fff;
+  & .title {
+    font-size: 16px;
+  }
+  & .hr {
+    width: 40px;
+    height: 1px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: inline-block;
+    background: @border-default-color;
+  }
+}
+
+.formItem {
+  margin-top: 15px;
+}
+
+.button {
+  margin-top: 40px;
+  & button {
+    display: block;
+    width: 100%;
+  }
+}
+
+.errorBox {
+  color: red;
+  text-align: center;
 }

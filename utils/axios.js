@@ -3,18 +3,18 @@ import axios from 'axios';
 import log from './log';
 
 axios.interceptors.request.use(function (config) {
-  log(config);
+  log(config, 'request');
   return config;
 }, function (error) {
-  log(error);
+  log(error, 'request');
   return Promise.reject(error);
 });
 
 axios.interceptors.response.use(function (response) {
-  log(response);
+  log(response, 'response');
   return response;
 }, function (error) {
-  log(error);
+  log(error, 'response');
   return Promise.reject(error);
 });
 

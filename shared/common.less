@@ -1,0 +1,22 @@
+@font-default-color: rgb(120, 120, 120);
+@border-default-color: rgb(130, 130, 130);
+
+.font-family {
+  font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+.middle {
+  display: table-cell;
+  text-align: center;
+  &:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    width: 0;
+    vertical-align: middle;
+  }
+  & > div {
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
