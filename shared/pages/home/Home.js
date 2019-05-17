@@ -9,43 +9,45 @@ import Input from '../../components/common/Input';
 import Modal from '../../components/common/Modal';
 import * as style from './style.less';
 
+// home page
 class Home extends React.Component {
   constructor() {
     super();
     this.state = {
       showLoginBox: false,
-      showLoginSuccessBox: false
+      showLoginSuccessBox: false,
     };
   }
-  componentDidMount() {
 
-  }
-  componentWillUnmount() {
-
-  }
   hiddenLoginBox() {
     this.setState({
-      showLoginBox: false
+      showLoginBox: false,
     });
   }
+
   showLoginBox() {
     this.setState({
-      showLoginBox: true
+      showLoginBox: true,
     });
   }
+
   loginSuccess() {
     this.showLoginSuccess();
   }
+
   showLoginSuccess() {
     this.setState({
-      showLoginSuccessBox: true
+      showLoginSuccessBox: true,
     });
+    this.hiddenLoginBox();
   }
+
   hiddenLoginSuccess() {
     this.setState({
-      showLoginSuccessBox: false
+      showLoginSuccessBox: false,
     });
   }
+
   render() {
     const { showLoginBox, showLoginSuccessBox } = this.state;
     return (
@@ -67,7 +69,7 @@ class Home extends React.Component {
           {
             showLoginSuccessBox && (
               <Modal close={() => this.hiddenLoginSuccess()}>
-                <LoginBox onSuccess={() => this.loginSuccess()} />
+                <LoginSuccess close={() => this.hiddenLoginSuccess()} />
               </Modal>
             )
           }
@@ -78,52 +80,79 @@ class Home extends React.Component {
   }
 }
 
+// login
 class LoginBox extends React.Component {
   constructor() {
     super();
     this.state = {
       loading: false,
+      sendTouched: false, // 点过send按钮后开启实时校验
       error: {
-        name: false,
-        email: false,
-        email2: false
+        name: '',
+        email: '',
+        email2: '',
+        responseError: '',
       },
       values: {},
-      responseError: ''
     };
     this.onChange = this.onChange.bind(this);
   }
+
   submit() {
+    const { values: { name, email }, error } = this.state;
+
+    this.setState({
+      sendTouched: true,
+      error: {
+        ...error,
+        responseError: '',
+      }
+    });
+
     const err = this.validator();
-    // 点过send按钮后开启实时校验
-    this.sendTouched = true;
     if (err._illegal) return;
+
     this.setState({
       loading: true,
     });
-    axios.post('/api/login', {
-      ...this.state.values
-    }).then((res) => {
 
+    axios.post('/api/login', {
+      name,
+      email,
+    }).then((res) => {
+      if (res && res.data && res.data.success) {
+        const { onSuccess } = this.props;
+        onSuccess && onSuccess();
+      }
+    }).catch((error) => {
+      if (error.response) {
+        this.setState({
+          error: {
+            responseError: error.response.data.errorMsg.errorMessage
+          }
+        });
+      }
     }).finally(() => {
       this.setState({
-        loading: false
+        loading: false,
       });
     });
   }
+
   onChange(name, value = '') {
-    const { values } = this.state;
+    const { values, sendTouched } = this.state;
     this.setState({
       values: {
         ...values,
-        [name]: value.trim()
-      }
+        [name]: value.trim(),
+      },
     }, () => {
-      if (this.sendTouched) {
+      if (sendTouched) {
         this.validator();
       }
     });
   }
+
   validator() {
     const { values } = this.state;
     const err = {};
@@ -148,7 +177,7 @@ class LoginBox extends React.Component {
       err.email2 = 'Confirm email is required';
     } else if (!/\w+@[a-z0-9]+\.[a-z]{2,4}/.test(values.email2)) {
       err.email2 = 'Confirm email format is wrong';
-    } else if (values.email2 !== values.email ) {
+    } else if (values.email2 !== values.email) {
       err.email2 = 'Confirm email is not equal to Email';
     } else {
       err.email2 = '';
@@ -157,48 +186,66 @@ class LoginBox extends React.Component {
     err._illegal = Object.keys(err).some(key => !!err[key]);
 
     this.setState({
-      error: err
+      error: err,
     });
-    
+
     return err;
   }
+
   render() {
-      const { loading, error = {}, responseError } = this.state;
-      return (
+    const { loading, error = {} } = this.state;
+    return (
           <div className={style.login}>
               <p className={style.title}>Request an invite</p>
               <div className={style.hr} />
               <div className={style.formItem}>
                   <Input
                     type="text"
-                    placeholder='Full name'
-                    name='name'
+                    placeholder="Full name"
+                    name="name"
                     error={error.name}
-                    onChange={this.onChange}/>
+                    onChange={this.onChange}
+                  />
               </div>
               <div className={style.formItem}>
                   <Input
                     type="email"
-                    placeholder='Email'
-                    name='email'
+                    placeholder="Email"
+                    name="email"
                     error={error.email}
-                    onChange={this.onChange}/>
+                    onChange={this.onChange}
+                  />
               </div>
               <div className={style.formItem}>
                   <Input
                     type="email"
-                    placeholder='Confirm email'
-                    name='email2'
+                    placeholder="Confirm email"
+                    name="email2"
                     error={error.email2}
-                    onChange={this.onChange}/>
+                    onChange={this.onChange}
+                  />
               </div>
-              <div  className={`${style.formItem} ${style.button}`}>
+              <div className={`${style.formItem} ${style.button}`}>
                   <Button onClick={() => this.submit()} loading={loading}>Send</Button>
               </div>
-              <p className={style.errorBox}>{responseError}</p>
+              <p className={style.errorBox}>{error.responseError}</p>
           </div>
-      );
+    );
   }
 }
+
+// login success
+const LoginSuccess = ({ close }) => {
+  return (
+    <div className={style.loginSuccess}>
+      <p className={style.title}>All done!</p>
+      <div className={style.hr} />
+      <p>You will be one of the first to experience Broccoli & Co. when we launch</p>
+      <div className={`${style.button}`}>
+        <Button onClick={close}>Ok</Button>
+      </div>
+    </div>
+  );
+};
 
 export default Home;

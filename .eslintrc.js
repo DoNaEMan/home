@@ -17,5 +17,6 @@ module.exports = {
     "react/require-react-props": "off",
     "eol-last": "off",
     "react/jsx-one-expression-per-line": "off",
+    "comma-dangle": "off"
   }
 };

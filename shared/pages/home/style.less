@@ -19,23 +19,11 @@
   }
 }
 
-.mask {
-  position: fixed;
-  padding: 20px 0;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, .2);
-  z-index: 100;
-  overflow: auto;
-  .middle;
-}
-
-.login {
+.login,
+.loginSuccess {
   position: relative;
   box-sizing: border-box;
-  padding: 30px 20px 40px;
+  padding: 30px 20px;
   width: 300px;
   border: 1px solid @border-default-color;
   background: #fff;
@@ -50,10 +38,18 @@
     display: inline-block;
     background: @border-default-color;
   }
+
+
 }
 
 .formItem {
   margin-top: 15px;
+}
+
+.loginSuccess {
+  & p {
+    line-height: 25px;
+  }
 }
 
 .button {
@@ -65,6 +61,15 @@
 }
 
 .errorBox {
+  margin-top: 10px;
+  height: 21px;
   color: red;
   text-align: center;
+}
+
+@media screen and (min-width: 500px) {
+  .loginSuccess {
+    width: 400px;
+    padding: 40px;
+  }
 }

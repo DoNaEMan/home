@@ -2,7 +2,9 @@
 
 .button {
   position: relative;
+  height: 32px;
   line-height: 30px;
+  box-sizing: border-box;
   padding: 0 10px;
   border: 1px solid @border-default-color;
   color: @font-default-color;
@@ -22,11 +24,9 @@
 .buttonLoading {
   margin-left: 10px;
   display: inline-block;
-  position: relative;
-  box-sizing: border-box;
-  top: 4px;
-  height: 16px;
-  width: 16px;
+  vertical-align: middle;
+  height: 14px;
+  width: 14px;
   border: 2px solid #000000;
   border-radius: 50%;
   border-left-color: transparent;
