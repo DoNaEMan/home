@@ -3,8 +3,7 @@
     ["@babel/preset-env", {
       "targets": {
         "browsers": [ "ie >= 9" ]
-      },
-      "useBuiltIns": "usage"
+      }
     }],
     "@babel/preset-react"
   ],
