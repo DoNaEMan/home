@@ -1,7 +1,12 @@
-start:
+start app:
 
-npm install
+    npm install
 
-npm run dev
+    npm run dev
 
-localhost:3000/home
+    localhost:3000/home
+
+
+test app：
+
+    npm run test
