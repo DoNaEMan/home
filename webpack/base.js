@@ -17,6 +17,7 @@ const base = {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, '../template/index.html'),
       filename: path.resolve(__dirname, '../client/index.html'),
+      alwaysWriteToDisk: true,
       inject: false,
       title: 'demo',
     }),

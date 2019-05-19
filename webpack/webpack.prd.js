@@ -8,7 +8,7 @@ const { rules, plugins, optimization } = require('./base');
 
 const config = {
   entry: {
-    index: path.resolve(__dirname, '../client/index.js'),
+    index: ['@babel/polyfill', path.resolve(__dirname, '../client/index.js')],
   },
   output: {
     filename: '[name].[chunkhash].js',

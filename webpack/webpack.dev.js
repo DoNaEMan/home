@@ -7,7 +7,7 @@ const { rules, plugins, optimization } = require('./base');
 
 const config = {
   entry: {
-    index: ['webpack-hot-middleware/client?reload=true', path.resolve(__dirname, '../client/index.js')],
+    index: ['@babel/polyfill', 'webpack-hot-middleware/client?reload=true', path.resolve(__dirname, '../client/index.js')],
   },
   output: {
     filename: '[name].js',
