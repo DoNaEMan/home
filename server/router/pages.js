@@ -4,7 +4,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 require('@babel/register')({
-  ignore: [/node_modules\//],
+  ignore: [/node_modules\//, /node_modules\\/],
   presets: ['@babel/preset-env', '@babel/preset-react'],
   plugins: ['@babel/plugin-transform-runtime', '@loadable/babel-plugin', 'dynamic-import-node', 'add-module-exports'],
 });
