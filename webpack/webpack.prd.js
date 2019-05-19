@@ -1,10 +1,10 @@
 const path = require('path');
 const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const LoadablePlugin = require('@loadable/webpack-plugin');
+const { rules, plugins, optimization } = require('./base');
 
 const config = {
   entry: {
@@ -38,26 +38,13 @@ const config = {
           'less-loader',
         ],
       },
-      {
-        test: /\.html$/,
-        loader: 'html-loader',
-      },
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader',
-      },
+      ...rules
     ],
   },
   plugins: [
+    ...plugins,
     new CleanWebpackPlugin({
       verbose: true,
-    }),
-    new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, '../template/index.html'),
-      filename: path.resolve(__dirname, '../client/index.html'),
-      inject: false,
-      title: 'demo',
     }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production'),
@@ -73,25 +60,8 @@ const config = {
       assetNameRegExp: /\.(scss|less|css)$/g,
     }),
   ],
-  optimization: {
-    splitChunks: {
-      chunks: 'all',
-      cacheGroups: {
-        vendors: {
-          test: /[\\/]node_modules[\\/]/,
-          name: 'vendors',
-          chunks: 'all',
-        },
-      },
-    },
-  },
+  optimization,
   mode: 'production',
 };
-
-// 选择性加载分析工具
-if (process.env.ANALYZER) {
-  const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-  config.plugins.push(new BundleAnalyzerPlugin());
-}
 
 module.exports = config;

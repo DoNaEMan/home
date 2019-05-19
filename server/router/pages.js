@@ -4,9 +4,9 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 require('@babel/register')({
-  ignore: [/node_modules\//, /server\/router\//, /node_modules\\/, /server\\router\\/],
+  ignore: [/node_modules\//],
   presets: ['@babel/preset-env', '@babel/preset-react'],
-  plugins: ['@loadable/babel-plugin', 'dynamic-import-node', 'add-module-exports'],
+  plugins: ['@babel/plugin-transform-runtime', '@loadable/babel-plugin', 'dynamic-import-node', 'add-module-exports'],
 });
 
 // less css hook

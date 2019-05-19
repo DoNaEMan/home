@@ -8,7 +8,7 @@ const Button = ({ children, className, loading, disabled = false, ...rest }) => 
     originalDisabled = true;
   }
   return (
-    <button {...rest} className={`${style.button} ${className} ${originalDisabled ? style.disabled : ''}`} disabled={originalDisabled}>
+    <button {...rest} className={`${style.button} ${className || ''} ${originalDisabled ? style.disabled : ''}`} disabled={originalDisabled}>
       { children }
       { loading && <span className={style.buttonLoading}></span> }
     </button>

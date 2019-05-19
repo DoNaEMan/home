@@ -1,6 +1,5 @@
 require('@babel/register')({
-  ignore: [/node_modules\//, /server\/router\//, /node_modules\\/, /server\\router\\/],
-  presets: ['@babel/preset-env'],
+  ignore: [/node_modules\//],
   plugins: ['add-module-exports'],
 });
 

@@ -1,10 +1,9 @@
 const path = require('path');
 const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const LoadablePlugin = require('@loadable/webpack-plugin');
 const WebpackBar = require('webpackbar');
+const { rules, plugins, optimization } = require('./base');
 
 const config = {
   entry: {
@@ -38,27 +37,13 @@ const config = {
           'less-loader',
         ],
       },
-      {
-        test: /\.html$/,
-        loader: 'html-loader',
-      },
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader',
-      },
+      ...rules
     ],
   },
   plugins: [
+    ...plugins,
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, '../template/index.html'),
-      filename: path.resolve(__dirname, '../client/index.html'),
-      inject: false,
-      alwaysWriteToDisk: true,
-      title: 'demo',
-    }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('development'),
     }),
@@ -69,24 +54,8 @@ const config = {
     new HtmlWebpackHarddiskPlugin(),
     new WebpackBar(),
   ],
-  optimization: {
-    splitChunks: {
-      chunks: 'all',
-      cacheGroups: {
-        vendors: {
-          test: /[\\/]node_modules[\\/]/,
-          name: 'vendors',
-          chunks: 'all',
-        },
-      },
-    },
-  },
+  optimization,
   mode: 'development',
 };
-
-// 选择性加载分析工具
-if (process.env.ANALYZER) {
-  config.plugins.push(new BundleAnalyzerPlugin());
-}
 
 module.exports = config;
