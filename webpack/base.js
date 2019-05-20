@@ -33,7 +33,7 @@ const base = {
           name: 'vendors1'
         },
         vendors2: {
-          test: /[\\/]node_modules[\\/]react-dom[\\/]/,
+          test: /[\\/]node_modules[\\/]react/,
           priority: 100,
           name: 'vendors2'
         },

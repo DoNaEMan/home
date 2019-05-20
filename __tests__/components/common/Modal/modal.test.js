@@ -29,9 +29,8 @@ describe('<Modal />', () => {
   });
 
   test('Modal renders in node', () => {
-    Object.defineProperty(global, 'window', {
-      value: undefined
-    });
+    // 模拟node环境
+    delete global.window;
     const wrapper = shallow(
       <Modal>
         <div>I am fine</div>

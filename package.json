@@ -5,14 +5,14 @@
   "main": "",
   "scripts": {
     "test": "jest --setupTestFrameworkScriptFile=./__tests__/setup.js --coverage --no-cache",
-    "dev": "react-file-pack ./react-file-pack-config.js && cross-env NODE_ENV=development nodemon ./server/bin/server.dev.js",
-    "build": "react-file-pack ./react-file-pack-config.js && webpack --config ./webpack/webpack.prd.js --progress",
+    "dev": "react-file-pack ./rfp.config.js && cross-env NODE_ENV=development nodemon ./server/bin/server.dev.js",
+    "build": "react-file-pack ./rfp.config.js && webpack --config ./webpack/webpack.prd.js --progress",
     "start": "node ./server/bin/server.prd.js",
-    "dev:analyze": "react-file-pack ./react-file-pack-config.js && cross-env NODE_ENV=development ANALYZER=true nodemon ./server/bin/server.dev.js",
-    "build:analyze": "react-file-pack ./react-file-pack-config.js && cross-env ANALYZER=true webpack --config ./webpack/webpack.prd.js --progress",
+    "dev:analyze": "react-file-pack ./rfp.config.js && cross-env NODE_ENV=development ANALYZER=true nodemon ./server/bin/server.dev.js",
+    "build:analyze": "react-file-pack ./rfp.config.js && cross-env ANALYZER=true webpack --config ./webpack/webpack.prd.js --progress",
     "eslint:fix": "./node_modules/.bin/eslint . --ext .js --fix",
     "stylelint:fix": "stylelint 'shared/**/*.css' --fix",
-    "refresh": "react-file-pack ./react-file-pack-config.js"
+    "refresh": "react-file-pack ./rfp.config.js"
   },
   "repository": {
     "type": "git",
@@ -68,7 +68,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-file-pack": "^3.0.0",
+    "react-file-pack": "^3.1.0",
     "react-redux": "^5.1.1",
     "react-router": "^5.0.0",
     "react-router-config": "^5.0.0",
