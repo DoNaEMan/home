@@ -1,8 +1,10 @@
+/* eslint-disable import/no-extraneous-dependencies */
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
 const LoadablePlugin = require('@loadable/webpack-plugin');
 const WebpackBar = require('webpackbar');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { rules, plugins, optimization } = require('./base');
 
 const config = {
@@ -20,7 +22,7 @@ const config = {
       {
         test: /\.(css|less)$/,
         use: [
-          'style-loader',
+          MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
@@ -47,11 +49,16 @@ const config = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('development'),
     }),
+    new MiniCssExtractPlugin({
+      filename: '[name].[hash].css',
+    }),
     new LoadablePlugin({
       filename: path.resolve(__dirname, '../dist/loadable-stats.json'),
       writeToDisk: true,
     }),
-    new HtmlWebpackHarddiskPlugin(),
+    new HtmlWebpackHarddiskPlugin({
+      alwaysWriteToDisk: true
+    }),
     new WebpackBar(),
   ],
   optimization,

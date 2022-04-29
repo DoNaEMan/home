@@ -1,3 +1,5 @@
+/* eslint-disable consistent-return */
+/* eslint-disable no-console */
 let generateScopedName = '[local]__[hash:5]';
 if (process.env.NODE_ENV === 'development') {
   generateScopedName = '[path][name]__[local]';
@@ -24,9 +26,9 @@ require('asset-require-hook')({
 
 const path = require('path');
 const Router = require('koa-router');
-const { renderToString, renderToNodeStream } = require('react-dom/server');
-const { ChunkExtractor, ChunkExtractorManager } = require('@loadable/server');
-const { matchRoutes, renderRoutes } = require('react-router-config');
+const { renderToString } = require('react-dom/server');
+const { ChunkExtractor } = require('@loadable/server');
+const { matchRoutes } = require('react-router-config');
 const { createStore } = require('redux');
 
 const statsFile = path.resolve(__dirname, '../../dist/loadable-stats.json');
@@ -42,21 +44,21 @@ router.get('/*', async (ctx, next) => {
   // 没有匹配到则 next
   if (!Array.isArray(matchedRouter) || matchedRouter.length === 0) return next();
   //
-  const allRequsts = [];
+  const allRequests = [];
   const allCallbacks = [];
   // 创建服务端store
   const store = createStore(reducer);
   matchedRouter.forEach(({ route }) => {
-    const loaddata = route.loaddata;
+    const { loaddata } = route;
     if (!loaddata) return;
     const { request, callback } = loaddata(config.DOMAIN);
-    allRequsts.push(request());
+    allRequests.push(request());
     allCallbacks.push(callback);
   });
 
-  if (allRequsts.length) {
+  if (allRequests.length) {
     try {
-      const value = await Promise.all(allRequsts);
+      const value = await Promise.all(allRequests);
       allCallbacks.forEach((callback, index) => {
         callback(store.dispatch, value[index]);
       });
